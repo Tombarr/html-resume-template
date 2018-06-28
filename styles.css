@@ -1,0 +1,229 @@
+@charset "UTF-8";
+
+@page {
+    size: letter portrait;
+    margin: 1in 0.79in;
+}
+
+* {
+    min-height: 0;
+    min-width: 0;
+    box-sizing: border-box;
+    transform-origin: 0px 0px 0px;
+}
+
+p:blank, li:blank, div:blank, section:blank {
+    display: none;
+}
+
+p:empty, li:empty, div:empty, section:empty {
+    display: none;
+}
+
+p:-moz-only-whitespace, li:-moz-only-whitespace, div:-moz-only-whitespace, section:-moz-only-whitespace {
+    display: none;
+}
+
+/* Page Variables */
+
+:root {
+    --page-width: 8.5in;
+    --page-height: 11in;
+    --main-width: 6.3in;
+    --header-height: 1.2in;
+    --sidebar-width: calc(var(--page-width) - var(--main-width));
+}
+
+body {
+    width: var(--page-width);
+    height: var(--page-height);
+    font-size: 1em;
+    margin: 0 auto;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+    text-decoration-skip: ink;
+    hyphens: auto;
+}
+
+#save {
+    height: 100%;
+}
+
+#save {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Misc */
+
+img {
+    max-width: 100%;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+abbr[title] {
+    text-decoration: none;
+    border: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li + li {
+    margin-top: 0.4em;
+}
+
+.fa {
+    text-align: center;
+    min-width: 1em;
+}
+
+li .fa {
+    margin-right: 0.3em;
+}
+
+/* Page layout */
+
+#save > aside {
+    flex-basis: var(--sidebar-width);
+    padding: 0.1618in 0 0.1618in 0.1618in;
+    display: flex;
+    flex-direction: column;
+}
+
+#save > aside > section + section {
+    margin-top: 2em;
+}
+
+#save > aside > section:last-child {
+    margin-top: auto;
+} 
+
+#save > section {
+    flex-basis: var(--main-width);
+    display: flex;
+    flex-direction: column;
+}
+
+#save > section > header {
+    flex-basis: var(--header-height);
+    flex-grow: 0;
+    justify-self: center;
+    padding: 0.1618in;
+}
+
+#save > section > section {
+    flex-grow: 1;
+    padding: 0.1618in;
+    display: flex;
+    flex-direction: column;
+}
+
+#save > section > section > section + section {
+    margin-top: 2em;
+}
+
+#save > section > section > section:last-child {
+    margin-top: auto;
+}
+
+.references address {
+    font-style: normal;
+    font-weight: 300;
+}
+
+.references address:first-line {
+    font-weight: 400;
+}
+
+.references address + address,
+.references address + p {
+    padding-top: 0.5em;
+}
+
+/* Skills */
+
+.skills li {
+    background-color: #f5f5f5;
+    border: 1px solid rgba(45, 45, 45, 0.1618);
+    border-radius: 3px;
+    color: #333;
+    padding: 4px 8px;
+    margin: 6px 6px 0 0;
+    display: inline-block;
+}
+
+/* Experience & Education */
+
+.education ol,
+.experience ol {
+    margin: 0;
+    padding: 0;
+}
+
+.experience ol {
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+}
+
+.experience ol > li {
+    margin: 0;
+    padding: 0;
+    flex-basis: 100%;
+    font-weight: 300;
+}
+
+.education ol > li {
+    font-weight: 300;
+}
+
+.experience ol > li + li {
+    margin-top: 0.75em;
+}
+
+.education ol > li div,
+.experience ol > li header {
+    display: flex;
+    flex-direction: row;
+}
+
+.experience ol > li > span,
+.education ol > li p,
+.experience ol > li header p {
+    font-weight: 400;
+}
+
+.experience ol > li header p {
+    font-size: 110%;
+}
+
+.education ol > li div > *:last-child,
+.experience ol > li header > *:last-child {
+    margin-left: auto;
+}
+
+.experience ol > li ul {
+    padding-top: 0.5em;
+}
+
+.experience ol > li ul li {
+    list-style-type: circle;
+    margin-left: 1.618em;
+}

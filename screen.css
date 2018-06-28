@@ -1,0 +1,72 @@
+html {
+    padding: 2.4em;
+}
+
+body {
+    border: 1px solid black;
+}
+
+#save > aside {
+    background-color: #f5f5f5;
+}
+
+#save > aside .skills li {
+    background-color: white;
+}
+
+button {
+    user-select: none;
+}
+
+#document-controls {
+    position: fixed;
+    right: 0;
+    top: 0;
+    margin-top: 0.5em;
+    margin-right: 0.5em;
+    display: flex;
+    flex-direction: column;
+}
+
+#document-controls button + button {
+    margin-top: 0.5em;
+}
+
+#github-link {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+    text-decoration: none;
+    color: black;
+}
+
+/* Source https://www.bestcssbuttongenerator.com/#/36 */
+
+button {
+	box-shadow:inset 0px 1px 0px 0px white;
+	background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+	background-color:#ededed;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#777777;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px white;
+}
+
+button:hover, button:active {
+	background:linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+	background-color:#dfdfdf;
+}
+
+button:active {
+	position:relative;
+	top:1px;
+}
