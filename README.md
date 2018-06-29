@@ -1,6 +1,7 @@
 # html-resume-template
 
 Single-page resume template built using HTML, CSS, and JS that can be viewed on the web or exported to a PDF.
+A live demo is available at [tombarr.github.io/html-resume-template](https://tombarr.github.io/html-resume-template/).
 
 ## Editing
 
