@@ -1,3 +1,4 @@
+"use strict";
 /**
  * Simple script to make text elements on the page editable,
  * and to save and restore the page across page loads.
@@ -6,7 +7,7 @@
  * disable access to localStorage.
  */
 (function() {
-    var VERSION = 1.0;
+    var VERSION = 1.01;
 
     // Source https://stackoverflow.com/questions/494143/creating-a-new-dom-element-from-an-html-string-using-built-in-dom-methods-or-pro
     function htmlToElement(html) {
@@ -31,7 +32,12 @@
         }
     }
 
+    function supportsTemplate() {
+        return ('content' in document.createElement('template'));
+    }
+
     var hasLocalStorage = supportsLocalStorage();
+    var hasTemplate = supportsTemplate();
 
     function savePage() {
         localStorage.setItem('page', escape(document.getElementById('save').innerHTML));
@@ -52,20 +58,25 @@
 
     // Source https://stackoverflow.com/questions/13405129/javascript-create-and-save-file
     function download(data, filename, type) {
-        var file = new Blob([data], {type: type});
+        var _URL = (window.URL || window.webkitURL);
+        var _Blob = (window.Blob || window.MozBlob || window.WebKitBlob);
+        var file = new _Blob([String.fromCharCode(0xFEFF), data], {type: type}); // prepend BOM
         if (window.navigator.msSaveOrOpenBlob) { // IE10+
             window.navigator.msSaveOrOpenBlob(file, filename);
         } else { // Others
-            var a = document.createElement("a"),
-                    url = URL.createObjectURL(file);
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            setTimeout(function() {
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(url);  
-            }, 0); 
+            var a = document.createElementNS("http://www.w3.org/1999/xhtml", "a"),
+                    url = _URL.createObjectURL(file);
+            if ('download' in a) {
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                var setImmediate = (window.setImmediate || window.setTimeout);
+                setImmediate(function() {
+                    document.body.removeChild(a);
+                    _URL.revokeObjectURL(url);  
+                }, 0);
+            }
         }
     }
 
@@ -108,6 +119,7 @@
     }
 
     function addDocumentControls() {
+        if (!hasTemplate) return false;
         var docControlsStr =
             `<!-- Document control buttons-->
             <div id="document-controls">
@@ -120,17 +132,20 @@
             </div>`;
         var docControls = htmlToElement(docControlsStr);
         document.body.appendChild(docControls);
+        return true;
     }
 
     function bindDocumentControls() {
         var actions = getButtonActions();
         var docControls = document.getElementById('document-controls');
+        if (!docControls) return false;
         var buttons = docControls.querySelectorAll('button[data-action]');
         for (var i = 0, e = buttons.length; i < e; i++) {
             if (buttons[i].dataset.action in actions) {
                 buttons[i].addEventListener('click', actions[buttons[i].dataset.action]);
             }
         }
+        return true;
     }
 
     function makeEditable() {
