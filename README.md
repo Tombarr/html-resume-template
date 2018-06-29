@@ -32,3 +32,8 @@ This project uses [normalize.css](https://github.com/necolas/normalize.css), fon
 
 Tested on Chrome (67) and Firefox (61) on mac OS (10.13.5).
 This software uses `localStorage`, `template`, flexbox, and custom properties and is intended for modern browsers.
+
+## Security & Privacy
+
+This application does not communicate or sync with a server, and all data is saved locally.
+It may not be able to save if `localStorage` is disabled for any reason.
