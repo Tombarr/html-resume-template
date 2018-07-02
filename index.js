@@ -112,6 +112,7 @@
                 });
             },
             'save': function(e) {
+                updateMetadata();
                 var pageStr = getPageContents();
                 download(pageStr, 'resume.html', 'text/html; charset=UTF-8');
             }
@@ -158,6 +159,61 @@
                 node.addEventListener('blur', savePage);
             }
         }
+    }
+
+    // Source https://stackoverflow.com/questions/12409299/how-to-get-current-formatted-date-dd-mm-yyyy-in-javascript-and-append-it-to-an-i
+    function getDateFormatted(inDate) {
+        var today = new Date();
+        var date = (inDate) ? inDate : today;
+        var dd = today.getDate();
+        var mm = today.getMonth()+1;
+        var yyyy = today.getFullYear();
+
+        // Pad day and month if needed
+        if (dd < 10) {
+            dd = '0'+dd;
+        }
+
+        if (mm < 10) {
+            mm = '0'+mm;
+        }
+
+        return yyyy+'-'+mm+'-'+dd;
+    }
+
+    function updateMetadata() {
+        updateMetaDate();
+        updateMetaSubject();
+        updateMetaAuthor();
+        updateMetaKeywords();
+    }
+
+    function updateMetaDate() {
+        document.querySelector('meta[name="date"]').setAttribute('content', getDateFormatted());
+    }
+
+    function updateMetaSubject() {
+        var summaryEl = document.querySelector('.summary > p');
+        if (!(summaryEl && summaryEl.textContent)) return;
+        var summaryText = summaryEl.textContent.trim().replace(/(\r\n\t|\n|\r\t)/gm, " ").replace(/\s+/g, " ");
+        document.querySelector('meta[name="subject"]').setAttribute('content', summaryText);
+    }
+
+    function updateMetaAuthor() {
+        var authorEl = document.querySelector('.name');
+        if (!(authorEl && authorEl.textContent)) return;
+        var authorName = authorEl.getAttribute('aria-label').trim();
+        document.querySelector('meta[name="author"]').setAttribute('content', authorName);
+    }
+
+    function updateMetaKeywords() {
+        var skillEls = document.querySelectorAll('.skills li');
+        if (!(skillEls && skillEls.length)) return;
+        var skills = new Array(skillEls.length);
+        for (var i = 0, e = skillEls.length; i < e; i++) {
+            skills[i] = skillEls[i].textContent.trim();
+        }
+        document.querySelector('meta[name="keywords"]').setAttribute('content', skills.join(','));
     }
 
     if (hasLocalStorage) {

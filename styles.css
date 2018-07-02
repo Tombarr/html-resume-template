@@ -1,10 +1,5 @@
 @charset "UTF-8";
 
-@page {
-    size: letter portrait;
-    margin: 1in 0.79in;
-}
-
 * {
     min-height: 0;
     min-width: 0;
@@ -27,16 +22,12 @@ p:-moz-only-whitespace, li:-moz-only-whitespace, div:-moz-only-whitespace, secti
 /* Page Variables */
 
 :root {
-    --page-width: 8.5in;
-    --page-height: 11in;
-    --main-width: 6.3in;
+    --main-width: 74%;
     --header-height: 1.2in;
-    --sidebar-width: calc(var(--page-width) - var(--main-width));
+    --sidebar-width: calc(100% - var(--main-width));
 }
 
 body {
-    width: var(--page-width);
-    height: var(--page-height);
     font-size: 1em;
     margin: 0 auto;
     -ms-text-size-adjust: 100%;
@@ -49,11 +40,7 @@ body {
     hyphens: auto;
 }
 
-#save {
-    height: 100%;
-}
-
-#save {
+#save > section:first-of-type {
     display: flex;
     flex-direction: row;
 }
@@ -100,46 +87,45 @@ li .fa {
 
 /* Page layout */
 
-#save > aside {
+#save > section:first-of-type > aside {
     flex-basis: var(--sidebar-width);
     padding: 0.1618in 0 0.1618in 0.1618in;
     display: flex;
     flex-direction: column;
 }
 
-#save > aside > section + section {
+#save > section:first-of-type > aside > section + section {
     margin-top: 2em;
 }
 
-#save > aside > section:last-child {
+#save > section:first-of-type > aside > section:last-child {
     margin-top: auto;
 } 
 
-#save > section {
+#save > section:first-of-type > section {
     flex-basis: var(--main-width);
     display: flex;
     flex-direction: column;
 }
 
-#save > section > header {
+#save > section:first-of-type > section > header {
     flex-basis: var(--header-height);
     flex-grow: 0;
-    justify-self: center;
     padding: 0.1618in;
 }
 
-#save > section > section {
+#save > section:first-of-type > section > section {
     flex-grow: 1;
     padding: 0.1618in;
     display: flex;
     flex-direction: column;
 }
 
-#save > section > section > section + section {
+#save > section:first-of-type > section > section > section + section {
     margin-top: 2em;
 }
 
-#save > section > section > section:last-child {
+#save > section:first-of-type > section > section > section:last-child {
     margin-top: auto;
 }
 
@@ -195,7 +181,7 @@ li .fa {
 }
 
 .experience ol > li + li {
-    margin-top: 0.75em;
+    margin-top: 1em;
 }
 
 .education ol > li div,

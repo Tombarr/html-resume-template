@@ -2,15 +2,15 @@ html {
     padding: 2.4em;
 }
 
-body {
+.sheet {
     border: 1px solid black;
 }
 
-#save > aside {
+#save > section:first-of-type > aside {
     background-color: #f5f5f5;
 }
 
-#save > aside .skills li {
+#save > section:first-of-type aside .skills li {
     background-color: white;
 }
 
