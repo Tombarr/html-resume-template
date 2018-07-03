@@ -7,7 +7,7 @@
  * disable access to localStorage.
  */
 (function() {
-    var VERSION = 1.01;
+    var VERSION = 1.1;
 
     // Source https://stackoverflow.com/questions/494143/creating-a-new-dom-element-from-an-html-string-using-built-in-dom-methods-or-pro
     function htmlToElement(html) {
@@ -91,6 +91,7 @@
         var elsToReset = baseEl.querySelectorAll('[contenteditable]');
         for (var i = 0, e = elsToReset.length; i < e; i++) {
             elsToReset[i].removeAttribute('contenteditable');
+            elsToReset[i].removeAttribute('spellcheck');
         }
 
         return baseEl.innerHTML;
@@ -154,6 +155,7 @@
         for (var i = 0, e = editableNodes.length; i < e; i++) {
             var node = editableNodes[i];
             node.setAttribute('contenteditable', 'true');
+            node.setAttribute('spellcheck', 'true');
 
             if (hasLocalStorage) {
                 node.addEventListener('blur', savePage);
@@ -186,34 +188,60 @@
         updateMetaSubject();
         updateMetaAuthor();
         updateMetaKeywords();
+        updateTitle();
     }
 
     function updateMetaDate() {
         document.querySelector('meta[name="date"]').setAttribute('content', getDateFormatted());
     }
 
-    function updateMetaSubject() {
+    function getSummary() {
         var summaryEl = document.querySelector('.summary > p');
-        if (!(summaryEl && summaryEl.textContent)) return;
+        if (!(summaryEl && summaryEl.textContent)) return '';
         var summaryText = summaryEl.textContent.trim().replace(/(\r\n\t|\n|\r\t)/gm, " ").replace(/\s+/g, " ");
-        document.querySelector('meta[name="subject"]').setAttribute('content', summaryText);
+        return summaryText;
     }
 
-    function updateMetaAuthor() {
+    function getAuthor() {
         var authorEl = document.querySelector('.name');
-        if (!(authorEl && authorEl.textContent)) return;
+        if (!(authorEl && authorEl.textContent)) return '';
         var authorName = authorEl.getAttribute('aria-label').trim();
-        document.querySelector('meta[name="author"]').setAttribute('content', authorName);
+        return authorName;
     }
 
-    function updateMetaKeywords() {
+    function getSkills() {
         var skillEls = document.querySelectorAll('.skills li');
-        if (!(skillEls && skillEls.length)) return;
+        if (!(skillEls && skillEls.length)) return [];
         var skills = new Array(skillEls.length);
         for (var i = 0, e = skillEls.length; i < e; i++) {
             skills[i] = skillEls[i].textContent.trim();
         }
+        return skills;
+    }
+
+    function updateMetaSubject() {
+        var summaryText = getSummary();
+        if ((!summaryText && summaryText.length)) return;
+        document.querySelector('meta[name="subject"]').setAttribute('content', summaryText);
+    }
+
+    function updateMetaAuthor() {
+        var authorName = getAuthor();
+        if (!(authorName && authorName.length)) return;
+        document.querySelector('meta[name="author"]').setAttribute('content', authorName);
+    }
+
+    function updateMetaKeywords() {
+        var skills = getSkills();
+        if (!(skills && skills.length)) return;
         document.querySelector('meta[name="keywords"]').setAttribute('content', skills.join(','));
+    }
+
+    function updateTitle() {
+        var authorName = getAuthor();
+        var summaryText = getSummary();
+        if ((!summaryText && summaryText.length) || !(authorName && authorName.length)) return;
+        document.title = authorName + " - " + summaryText;
     }
 
     if (hasLocalStorage) {
