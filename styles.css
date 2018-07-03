@@ -76,12 +76,12 @@ li + li {
     margin-top: 0.4em;
 }
 
-.fa {
+.fa, .fab {
     text-align: center;
     min-width: 1em;
 }
 
-li .fa {
+li .fa, li .fab {
     margin-right: 0.3em;
 }
 
