@@ -5,11 +5,23 @@ A live demo is available at [tombarr.github.io/html-resume-template](https://tom
 
 ## Editing
 
-This template has the ability to edit, and automatically save, inside the browser! Elements are dynamically marked with `contenteditable`, allowing you to change the text, add and remove bullet points, etc.
+This template has the ability to edit, and automatically save, inside the browser! The entire page is marked editable with [`document.designMode`](https://developer.mozilla.org/en-US/docs/Web/API/Document/designMode).
 
 The below example is from Firefox (61): adding several list items then refreshing the page.
 
 ![Inline Editing](./editing_full.gif "Inline Editing")
+
+In most browsers, you can use `Command/CTRL + B/I` to make text bold or italic.
+
+![Text Styling](./bold+italic.gif "Text Styling")
+
+There are also two types of returns, `Shift + Enter`, which adds a `<br>` within the current element:
+
+![shift + enter](./shift+enter.gif "shift + enter")
+
+And `Enter`, which is somewhat contextual. If focused after the last character, it can be used to append list elements:
+
+![enter](./enter.gif "enter")
 
 ## Sample
 

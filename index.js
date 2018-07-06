@@ -169,6 +169,46 @@
         return true;
     }
 
+    function execCommand(commandName) {
+        if ('execCommand' in document) {
+            if (!queryCommandSupported(commandName)) return false;
+
+            try {
+                return document.execCommand(commandName, false, null);
+            } catch(e) {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    function queryCommandSupported(commandName) {
+        if ('queryCommandSupported' in document) {
+            return document.queryCommandSupported(commandName);
+        }
+
+        return false;
+    }
+
+    function bindMutationObserver() {
+        if (!('MutationObserver' in window) || !hasLocalStorage) return;
+
+        function onMutate(mutations) {
+            requestAnimationFrame(savePage);
+        }
+
+        var observer = new MutationObserver(onMutate);
+
+        var config = {
+            childList: true,
+            characterData: true,
+            subtree: true
+        };
+
+        observer.observe(document.body, config);
+    }
+
     function makeEditable() {
         if (USE_CONTENTEDITABLE) {
             var editableNodes = document.querySelectorAll('p, span, ul.editable, ol.editable, ul:not(.editable) li, ol:not(.editable) li, time, h1, h2, h3, h4, h5, h6, address');
@@ -176,15 +216,16 @@
                 var node = editableNodes[i];
                 node.setAttribute('contenteditable', 'true');
                 node.setAttribute('spellcheck', 'true');
-
-                if (hasLocalStorage) {
-                    node.addEventListener('blur', savePage);
-                }
             }
+        } else {
+            document.body.setAttribute('spellcheck', 'true');
+            document.designMode = 'on';
         }
 
-        document.body.setAttribute('spellcheck', 'true');
-        document.designMode = 'on';
+        if (hasLocalStorage) {
+            document.body.addEventListener('focusout', savePage);
+            document.body.addEventListener('focusin', savePage);
+        }
     }
 
     function updatePageNumbers() {
@@ -286,4 +327,5 @@
 
     updatePageNumbers();
     makeEditable();
+    requestAnimationFrame(bindMutationObserver);
 })();
