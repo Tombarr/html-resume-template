@@ -7,7 +7,9 @@
  * disable access to localStorage.
  */
 (function() {
-    var VERSION = 1.1;
+    var VERSION = 1.2;
+
+    var USE_CONTENTEDITABLE = !('designMode' in document);
 
     // Source https://stackoverflow.com/questions/494143/creating-a-new-dom-element-from-an-html-string-using-built-in-dom-methods-or-pro
     function htmlToElement(html) {
@@ -83,18 +85,31 @@
     // Clone HTML node, but remove extraneous elements and make read-only
     function getPageContents() {
         var baseEl = document.documentElement.cloneNode(true);
+        baseEl.querySelector('body').removeAttribute('spellcheck');
         var elsToRemove = baseEl.querySelectorAll('script, iframe, #document-controls, #github-link');
         for (var i = 0, e = elsToRemove.length; i < e; i++) {
             elsToRemove[i].parentElement.removeChild(elsToRemove[i]);
         }
 
-        var elsToReset = baseEl.querySelectorAll('[contenteditable]');
-        for (var i = 0, e = elsToReset.length; i < e; i++) {
-            elsToReset[i].removeAttribute('contenteditable');
-            elsToReset[i].removeAttribute('spellcheck');
+        if (USE_CONTENTEDITABLE) {
+            var elsToReset = baseEl.querySelectorAll('[contenteditable]');
+            for (var i = 0, e = elsToReset.length; i < e; i++) {
+                elsToReset[i].removeAttribute('contenteditable');
+                elsToReset[i].removeAttribute('spellcheck');
+            }
         }
 
         return baseEl.innerHTML;
+    }
+
+    function addPage() {
+        var sheetContainer = document.querySelector('.sheet').parentElement;
+        var sheetHtml =
+        `<section class="sheet">
+            <aside></aside>
+            <section></section>
+        </section>`;
+        sheetContainer.appendChild(htmlToElement(sheetHtml));
     }
 
     function getButtonActions() {
@@ -116,6 +131,10 @@
                 updateMetadata();
                 var pageStr = getPageContents();
                 download(pageStr, 'resume.html', 'text/html; charset=UTF-8');
+            },
+            'addPage': function(e) {
+                addPage();
+                updatePageNumbers();
             }
         };
     }
@@ -151,16 +170,29 @@
     }
 
     function makeEditable() {
-        var editableNodes = document.querySelectorAll('p, span, ul.editable, ol.editable, ul:not(.editable) li, ol:not(.editable) li, time, h1, h2, h3, h4, h5, h6, address');
-        for (var i = 0, e = editableNodes.length; i < e; i++) {
-            var node = editableNodes[i];
-            node.setAttribute('contenteditable', 'true');
-            node.setAttribute('spellcheck', 'true');
+        if (USE_CONTENTEDITABLE) {
+            var editableNodes = document.querySelectorAll('p, span, ul.editable, ol.editable, ul:not(.editable) li, ol:not(.editable) li, time, h1, h2, h3, h4, h5, h6, address');
+            for (var i = 0, e = editableNodes.length; i < e; i++) {
+                var node = editableNodes[i];
+                node.setAttribute('contenteditable', 'true');
+                node.setAttribute('spellcheck', 'true');
 
-            if (hasLocalStorage) {
-                node.addEventListener('blur', savePage);
+                if (hasLocalStorage) {
+                    node.addEventListener('blur', savePage);
+                }
             }
         }
+
+        document.body.setAttribute('spellcheck', 'true');
+        document.designMode = 'on';
+    }
+
+    function updatePageNumbers() {
+        var pages = document.querySelectorAll('.sheet');
+        for (var i = 0, e = pages.length; i < e; i++) {
+            pages[i].setAttribute('data-page-number', i + 1);
+        }
+        document.body.setAttribute('data-page-count', pages.length);
     }
 
     // Source https://stackoverflow.com/questions/12409299/how-to-get-current-formatted-date-dd-mm-yyyy-in-javascript-and-append-it-to-an-i
@@ -182,6 +214,8 @@
 
         return yyyy+'-'+mm+'-'+dd;
     }
+
+    // Metadata
 
     function updateMetadata() {
         updateMetaDate();
@@ -250,5 +284,6 @@
         bindDocumentControls();
     }
 
+    updatePageNumbers();
     makeEditable();
 })();
