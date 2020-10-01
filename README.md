@@ -50,3 +50,7 @@ This software uses `localStorage`, `template`, flexbox, and custom properties an
 
 This application does not communicate or sync with a server, and all data is saved locally.
 It may not be able to save if `localStorage` is disabled for any reason.
+
+## Uses
+
+This application can be used to make a attractive resume for your dream company.
