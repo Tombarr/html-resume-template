@@ -14,7 +14,7 @@ html {
     background-color: white;
 }
 
-button {
+button, a[role="button"] {
     user-select: none;
 }
 
@@ -28,7 +28,10 @@ button {
     flex-direction: column;
 }
 
-#document-controls button + button {
+#document-controls button + button,
+#document-controls button + a[role="button"],
+#document-controls a[role="button"] + a[role="button"],
+#document-controls a[role="button"] + button {
     margin-top: 0.5em;
 }
 
@@ -45,7 +48,7 @@ button {
 
 /* Source https://www.bestcssbuttongenerator.com/#/36 */
 
-button {
+button, a[role="button"] {
 	box-shadow:inset 0px 1px 0px 0px white;
 	background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
 	background-color:#ededed;
@@ -61,12 +64,13 @@ button {
 	text-shadow:0px 1px 0px white;
 }
 
-button:hover, button:active {
+button:hover, button:active,
+a[role="button"]:hover, a[role="button"]:active {
 	background:linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
 	background-color:#dfdfdf;
 }
 
-button:active {
+button:active, a[role="button"]:active {
 	position:relative;
 	top:1px;
 }
