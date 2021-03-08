@@ -25,6 +25,7 @@ p:-moz-only-whitespace, li:-moz-only-whitespace, div:-moz-only-whitespace, secti
     --main-width: 74%;
     --header-height: 1.2in;
     --sidebar-width: calc(100% - var(--main-width));
+    --green: #008000
 }
 
 body {
@@ -61,6 +62,11 @@ abbr[title] {
     border: none;
 }
 
+time{
+    font-weight: 300;
+    font-size: 0.85em;
+}
+
 ul {
     margin: 0;
     padding: 0;
@@ -83,6 +89,11 @@ li + li {
 
 li .fa, li .fab {
     margin-right: 0.3em;
+}
+
+.section-header{
+    color: var(--green);
+    font-weight: bold;
 }
 
 /* Page layout */
@@ -117,6 +128,7 @@ li .fa, li .fab {
 #save > section:first-of-type > section > section {
     flex-grow: 1;
     padding: 0.1618in;
+    padding-top: 0;
     display: flex;
     flex-direction: column;
 }
@@ -230,4 +242,12 @@ li .fa, li .fab {
 .experience ol > li ul li {
     list-style-type: circle;
     margin-left: 1.618em;
+}
+
+/* Projects */
+.project-title {
+    font-weight: 400;
+}
+.project-description ul{
+    font-weight: 300;
 }
