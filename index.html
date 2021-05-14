@@ -29,7 +29,7 @@
     <body class="letter">
         <section id="save">
             <section class="sheet">
-                <aside>
+                <aside class="aside">
                     <section class="contact">
                         <h6>Contact</h6>
                         <ul>
@@ -43,7 +43,7 @@
                                 <p><i class="fa fa-envelope" title="Email"></i> <a href="mailto:aghose@buffalo.edu">aghose@buffalo.edu</a></p>
                             </li>
                             <li>
-                                <p><i class="fa fa-globe-americas" title="Website"></i> <a href="https://">placeholder.com</a></p>
+                                <p><i class="fa fa-globe-americas" title="Website"></i> <a href="https://www.akash-ghose.com">akash-ghose.com</a></p>
                             </li>
                             <li>
                                 <p><i class="fab fa-github" title="GitHub"></i> <a href="https://github.com/aghose">github.com/aghose</a></p>
@@ -53,11 +53,11 @@
                     <section class="skills">
                         <h6>Skills</h6>
                         <ul>
-                            <li><span>Data Cleaning</span></li>
-                            <li><span>Data Analysis</span></li>
-                            <li><span>Data Visualization</span></li>
-                            <li><span>Machine Learning</span></li>
-                            <li><span>Responsive UI/UX Design</span></li>
+                          <li><span>Machine Learning</span></li>
+                          <li><span>Data Cleaning</span></li>
+                          <li><span>Data Analysis</span></li>
+                          <li><span>Data Visualization</span></li>
+                          <li><span>Responsive UI/UX Design</span></li>
                         </ul>
                     </section>
                     <section class="skills">
@@ -77,11 +77,30 @@
                             <li><span>MongoDB</span></li>
                         </ul>
                     </section>
-                    <section class="references">
-                        <h6>References</h6>
-                        
-                        
-                    </section>
+                    <section class="skills">
+                        <h6>Libraries</h6>
+                        <ul>
+                          <li><span>Pandas</span></li>
+                          <li><span>NumPy</span></li>
+                          <li><span>Seaborn</span></li>
+                          <li><span>Matplotlib</span></li>
+                          <li><span>Selenium</span></li>
+                          <li><span>Streamlit</span></li>
+                          <li><span>DplyR</span></li>
+                          <li><span>Ggplot2</span></li>
+                          <li><span>RShiny</span></li>
+                        </ul>
+                      </section>
+                      <section class="skills">
+                        <h6>Algorithms</h6>
+                        <ul>
+                          <li><span>Linear Regression</span></li>
+                          <li><span>Logistic Regression</span></li>
+                          <li><span>Lasso Regression</span></li>
+                          <li><span>KNN</span></li>
+                          <li><span>K-Means</span></li>
+                        </ul>
+                      </section>        
                 </aside>
                 <!-- HEADER -->
                 <section>
@@ -104,7 +123,10 @@
                     <section>
                         <section class="summary">
                             <h6 class="section-header">Summary</h6>
-                            <p>Tenacious worker, looking to bring creative and innovate solutions to your quandaries</p>
+                            <p class="sanserif">
+                              Meticulous and creative individual, eager for knowledge and
+                              growth.
+                            </p>
                         </section>
                         <!-- EXPERIENCE -->
                         <section class="experience">
@@ -113,15 +135,23 @@
                                 <li>
                                     <header>
                                         <p class="sanserif">Software Engineer</p>
-                                        <time>June 2017 – August 2017</time>
+                                        <time>Jan 2021 – Present</time>
                                     </header>
                                     <span>FoodWeb - Non Profit Startup</span>
                                     <ul>
-                                        <li>Created various PostgreSQL database tables and stored procedures</li>
-                                        <li>Developed server-side functionality using Node.js</li>
-                                        <li>Collaborated with the project lead to design and implement an efficient software architecture</li>
-                                        <li>Assisted others with understanding the database structure</li>
-                                        <li>Implemented client-side features using Angular</li>
+                                        <li>
+                                            Created various PostgreSQL database tables and stored
+                                            procedures
+                                          </li>
+                                          <li>Developed server-side functionality using Node.js</li>
+                                          <li>
+                                            Collaborated with the project lead to design and implement
+                                            an efficient software architecture
+                                          </li>
+                                          <!-- <li>
+                                            Assisted others with understanding the database structure
+                                          </li> -->
+                                          <li>Implemented client-side features using Angular</li>
                                     </ul>
                                 </li>
                                 <li>
@@ -129,12 +159,17 @@
                                         <p class="sanserif">Teaching Assistant</p>
                                         <time>January 2017 – January 2020</time>
                                     </header>
-                                    <span>University at Buffalo</span>
+                                    <span>University at Buffalo – Dr. Matthew Hertz</span>
                                     <ul>
-                                        <li>Led recitations and office hours for Intro to Programming I and II</li>
-                                        <li>Assisted students with debugging code</li>
-                                        <li>Clarified gaps to facilitate conceptual understanding</li>
-                                        <li>Proofread professors’ instructions and code</li>
+                                        <li>
+                                            Led recitations and office hours for Intro to Programming
+                                            I and II
+                                          </li>
+                                          <li>Assisted students with debugging code</li>
+                                          <li>
+                                            Clarified gaps to facilitate conceptual understanding
+                                          </li>
+                                          <li>Proofread professor's instructions and code</li>
                                     </ul>
                                 </li>
                                 
@@ -148,18 +183,67 @@
                                     <header class="project-title">
                                         Glassdoor Mining project
                                     </header>
+                                    <span>Supervised by Dr. Bina Ramamurthy</span>
                                     <span class="project-description">
                                         <ul>
-                                            <li>Used Python selenium to collect 2000 Glassdoor job postings regarding Data Scientists</li>
-                                            <li>Used pandas, numpy and matplotlib to clean the data</li>   
-                                            <li>Used seaborn and matplotlib to visualize the data</li>  
-                                            <li>Applied Machine Learning algorithims to use data to predict an estimated salary</li>
-                                            <li>Used Streamlit to build a data product showcasing all of the above</li> 
-                                            <li>View final data product <a href="https://glassdoor-mining-proj.herokuapp.com/">here</a></li>                                      
+                                            <li>
+                                                Mined 2000 Glassdoor Data Scientist job
+                                                postings via Python Selenium
+                                              </li>
+                                              <li>
+                                                Refined and processed data using Pandas and NumPy
+                                              </li>
+                                              <li>Graphed data with Seaborn and Matplotlib
+                                              </li>
+                                              <li>
+                                                Predicted an estimated salary by applying various Machine
+                                                Learning algorithms
+                                              </li>
+                                              <li>
+                                                Developed a configurable web app showcasing the analyzed data
+                                                and predictive models: <a href="https://glassdoor-mining-proj.herokuapp.com/"
+                                                > glassdoor-mining-proj.herokuapp.com</a>
+                                              </li>                                              
+                                            </ul>
+                                        </span>
+                                      </li>
+                                      <li>
+                                        <header class="project-title">
+                                          BLM Data Science project
+                                        </header>
+                                        <span class="project-description">
+                                          <ul>
+                                            <li>Gathered statistical data from consumerfinance.gov</li>
+                                            <li>
+                                              Analyzed and cleaned data by applying R and DplyR methods
+                                            </li>
+                                            <li>Visualized data using Ggplot2</li>
+                                            <li>
+                                              Demonstrated black mortgage loan applicants are more
+                                              likely to be rejected than their white counterparts
+                                            </li>
+                                            <li>
+                                              Forecasted applicant's income
+                                              by applying linear regression
+                                            </li>
+                                          </ul>
+                                        </span>
+                                      </li>
+                                      <li>
+                                        <header class="project-title">Other Projects</header>
+                                        <span class="project-description">
+                                          <ul>
+                                            <li>
+                                              Various other projects can be found at:
+                                              <a href="/#projects">akash-ghose.com/#projects</a>
+                                            </li>
+                                            <li>
+                                              Or visit github at:
+                                              <a href="github.com/aghose">github.com/aghose</a>
+                                            </li>
                                         </ul>
                                     </span>
-                                </li>
-                                
+                                </li>                                
                             </ol>
                         </section>
                         <!-- EDUCATION -->
@@ -169,23 +253,24 @@
                                 <li>
                                     <div>
                                         <p class="sanserif">Bachelor of Arts in Economics</p>
-                                        <time>Graduated: Dec 2020</time>
-                                    </div>
-                                    <div>
-                                        <span>University At Buffalo</span>
-                                        <span></span>
+                                        <time>University at Buffalo: Dec 2020</time>
                                     </div>
                                 </li>
                                 <li>
                                     <div>
                                         <p class="sanserif">Minor in Computer Science</p>
-                                        <time>Graduated: Dec 2020</time>
-                                    </div>
-                                    <div>
-                                        <span>University At Buffalo</span>
-                                        <span></span>
+                                        <time></time>
                                     </div>
                                 </li>
+                                <li>
+                                  <span class="coursework">
+                                    <ul>
+                                        <li>
+                                          Coursework: Data Science, Distributed Systems, Web Design
+                                        </li>
+                                      </ul>
+                                    </span>  
+                              </li>
                             </ol>
                         </section>
 

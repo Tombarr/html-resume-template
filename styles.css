@@ -25,11 +25,14 @@ p:-moz-only-whitespace, li:-moz-only-whitespace, div:-moz-only-whitespace, secti
     --main-width: 74%;
     --header-height: 1.2in;
     --sidebar-width: calc(100% - var(--main-width));
-    --green: #008000
+    --dark-green: #006400;
+    --dark-grey: #343434;
+    --green: #008000;
+    --accent: var(--green);
 }
 
 body {
-    font-size: 1em;
+    font-size: 0.80em;
     margin: 0 auto;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
@@ -110,7 +113,7 @@ li .fa, li .fab {
 }
 
 #save > section:first-of-type > aside > section:last-child {
-    margin-top: auto;
+
 } 
 
 #save > section:first-of-type > section {
@@ -134,11 +137,11 @@ li .fa, li .fab {
 }
 
 #save > section:first-of-type > section > section > section + section {
-    margin-top: 2em;
+    margin-top: 1.3em;
 }
 
 #save > section:first-of-type > section > section > section:last-child {
-    margin-top: auto;
+
 }
 
 .references address {
@@ -155,11 +158,26 @@ li .fa, li .fab {
     padding-top: 0.5em;
 }
 
+/* Aside*/
+.aside {
+    /* font-size: 0.85em; */
+}
+
+.aside h6 {
+    margin-bottom: 0.8rem;
+}
+
 /* Contact*/
 
 .contact a {
     text-decoration: inherit;
     color: inherit;
+}
+
+/* Summary */
+
+.summary p {
+    color: var(--dark-grey);
 }
 
 /* Skills */
@@ -203,11 +221,13 @@ li .fa, li .fab {
     margin: 0;
     padding: 0;
     flex-basis: 100%;
-    font-weight: 300;
+    font-weight: 400;
+    color: var(--dark-grey);
 }
 
 .education ol > li {
-    font-weight: 300;
+    font-weight: 400;
+    color: var(--dark-grey);
 }
 
 .experience ol > li + li {
@@ -223,7 +243,7 @@ li .fa, li .fab {
 .experience ol > li > span,
 .education ol > li p,
 .experience ol > li header p {
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .experience ol > li header p {
@@ -244,10 +264,20 @@ li .fa, li .fab {
     margin-left: 1.618em;
 }
 
+.coursework {
+    font-weight: 400 !important;
+}
+
+.coursework ul > li {
+    list-style-type: circle;
+    margin-left: 1.618em;
+}
+
 /* Projects */
 .project-title {
-    font-weight: 400;
+    font-weight: 500;
 }
 .project-description ul{
-    font-weight: 300;
+    font-weight: 400;
+    color: var(--dark-grey);
 }
