@@ -19,6 +19,10 @@ p:-moz-only-whitespace, li:-moz-only-whitespace, div:-moz-only-whitespace, secti
     display: none;
 }
 
+a{
+    text-decoration: none;
+    color: #222f3e;
+}
 /* Page Variables */
 
 :root {
