@@ -51,6 +51,14 @@
         return unescape(pageStr);
     }
 
+    function setDesignMode(mode) {
+        return function() {
+            if ('designMode' in document) {
+                document.designMode = mode;
+            }
+        };
+    }
+
     function restoreSavedPage() {
         var savedPage = getSavedPage();
         if (savedPage) {
@@ -58,28 +66,11 @@
         }
     }
 
-    // Source https://stackoverflow.com/questions/13405129/javascript-create-and-save-file
-    function download(data, filename, type) {
-        var _URL = (window.URL || window.webkitURL);
-        var _Blob = (window.Blob || window.MozBlob || window.WebKitBlob);
-        var file = new _Blob([String.fromCharCode(0xFEFF), data], {type: type}); // prepend BOM
-        if (window.navigator.msSaveOrOpenBlob) { // IE10+
-            window.navigator.msSaveOrOpenBlob(file, filename);
-        } else { // Others
-            var a = document.createElementNS("http://www.w3.org/1999/xhtml", "a"),
-                    url = _URL.createObjectURL(file);
-            if ('download' in a) {
-                a.href = url;
-                a.download = filename;
-                document.body.appendChild(a);
-                a.click();
-                var setImmediate = (window.setImmediate || window.setTimeout);
-                setImmediate(function() {
-                    document.body.removeChild(a);
-                    _URL.revokeObjectURL(url);  
-                }, 0);
-            }
-        }
+    function getDownloadLink(data, type) {
+        var URL = (window.URL || window.webkitURL);
+        var Blob = (window.Blob || window.MozBlob || window.WebKitBlob);
+        var file = new Blob([String.fromCharCode(0xFEFF), data], { type: type }); // prepend BOM
+        return URL.createObjectURL(file);
     }
 
     // Clone HTML node, but remove extraneous elements and make read-only
@@ -127,11 +118,6 @@
                     window.print();
                 });
             },
-            'save': function(e) {
-                updateMetadata();
-                var pageStr = getPageContents();
-                download(pageStr, 'resume.html', 'text/html; charset=UTF-8');
-            },
             'addPage': function(e) {
                 addPage();
                 updatePageNumbers();
@@ -145,7 +131,7 @@
             `<!-- Document control buttons-->
             <div id="document-controls">
                 <button data-action="clear" title="Remove saved draft">Clear draft</button>
-                <button data-action="save" title="Download as HTML">Save HTML</button>
+                <a role="button" data-action="save" title="Download as HTML" id="download-link" download>Save HTML</a>
                 <button data-action="print" title="Print">Print</button>
             </div>
             <div id="github-link">     
@@ -155,6 +141,8 @@
         document.body.appendChild(docControls);
         return true;
     }
+
+    var downloadLink = null;
 
     function bindDocumentControls() {
         var actions = getButtonActions();
@@ -166,36 +154,33 @@
                 buttons[i].addEventListener('click', actions[buttons[i].dataset.action]);
             }
         }
+        downloadLink = docControls.querySelector('#download-link');
+        if (!USE_CONTENTEDITABLE) {
+            downloadLink.addEventListener('mouseover', setDesignMode('off'));
+            downloadLink.addEventListener('mouseout', setDesignMode('on'));
+            downloadLink.addEventListener('touchstart', setDesignMode('off'));
+            downloadLink.addEventListener('touchend', setDesignMode('on'));
+        }
         return true;
     }
 
-    function execCommand(commandName) {
-        if ('execCommand' in document) {
-            if (!queryCommandSupported(commandName)) return false;
-
-            try {
-                return document.execCommand(commandName, false, null);
-            } catch(e) {
-                return false;
-            }
-        }
-
-        return false;
-    }
-
-    function queryCommandSupported(commandName) {
-        if ('queryCommandSupported' in document) {
-            return document.queryCommandSupported(commandName);
-        }
-
-        return false;
+    function updateDownloadLink() {
+        if (!downloadLink) return;
+        var pageContents = getPageContents();
+        var objectUrl = getDownloadLink(pageContents, 'text/html; charset=UTF-8');
+        downloadLink.setAttribute('href', objectUrl);
+        downloadLink.setAttribute('download', 'resume.html'); // file name
     }
 
     function bindMutationObserver() {
         if (!('MutationObserver' in window) || !hasLocalStorage) return;
 
         function onMutate(mutations) {
-            requestAnimationFrame(savePage);
+            requestAnimationFrame(function() {
+                savePage();
+                updateMetadata();
+                updateDownloadLink();
+            });
         }
 
         var observer = new MutationObserver(onMutate);
@@ -240,9 +225,9 @@
     function getDateFormatted(inDate) {
         var today = new Date();
         var date = (inDate) ? inDate : today;
-        var dd = today.getDate();
-        var mm = today.getMonth()+1;
-        var yyyy = today.getFullYear();
+        var dd = date.getDate();
+        var mm = date.getMonth()+1;
+        var yyyy = date.getFullYear();
 
         // Pad day and month if needed
         if (dd < 10) {
@@ -323,6 +308,8 @@
         restoreSavedPage();
         addDocumentControls();
         bindDocumentControls();
+        updateMetadata();
+        updateDownloadLink();
     }
 
     updatePageNumbers();
