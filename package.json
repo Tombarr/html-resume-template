@@ -1,0 +1,24 @@
+{
+  "name": "html-resume-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+   "lint:js": "eslint ./*.js",
+   "lint": "npm run lint:js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lnellyee/html-resume-template.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lnellyee/html-resume-template/issues"
+  },
+  "homepage": "https://github.com/Lnellyee/html-resume-template#readme",
+  "devDependencies": {
+    "eslint": "8.9.0"
+  }
+}

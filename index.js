@@ -84,9 +84,9 @@
 
         if (USE_CONTENTEDITABLE) {
             var elsToReset = baseEl.querySelectorAll('[contenteditable]');
-            for (var i = 0, e = elsToReset.length; i < e; i++) {
-                elsToReset[i].removeAttribute('contenteditable');
-                elsToReset[i].removeAttribute('spellcheck');
+            for (var j = 0, el = elsToReset.length; i < el; i++) {
+                elsToReset[j].removeAttribute('contenteditable');
+                elsToReset[j].removeAttribute('spellcheck');
             }
         }
 
@@ -105,7 +105,7 @@
 
     function getButtonActions() {
         return {
-            'clear': function(e) {
+            'clear': function() {
                 requestAnimationFrame(function() {
                     if (hasLocalStorage) {
                         localStorage.clear();
@@ -113,12 +113,12 @@
                     }
                 });
             },
-            'print': function(e) {
+            'print': function() {
                 requestAnimationFrame(function() {
                     window.print();
                 });
             },
-            'addPage': function(e) {
+            'addPage': function() {
                 addPage();
                 updatePageNumbers();
             }
@@ -175,7 +175,7 @@
     function bindMutationObserver() {
         if (!('MutationObserver' in window) || !hasLocalStorage) return;
 
-        function onMutate(mutations) {
+        function onMutate() {
             requestAnimationFrame(function() {
                 savePage();
                 updateMetadata();
