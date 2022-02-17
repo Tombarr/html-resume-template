@@ -1,15 +1,12 @@
-# .eslintrc.yml
-
-env:
-  es2021: true
-  browser: true
+ # .eslintrc.yml
+env: {}
+es2021: true
+browser: true
 
 extends:
-  - eslint:recommended
+- eslint:recommended
 
-parserOptions:
-  ecmaVersion: 2021
-  sourceType: module
+parserOptions:  { "project": ["./tsconfig.json"] }
+ecmaVersion: 2021
+sourceType: module
 
-rules:
-  no-unused-vars: 1
