@@ -1,12 +1,22 @@
- # .eslintrc.yml
-env: {}
-es2021: true
-browser: true
-
-extends:
-- eslint:recommended
-
-parserOptions:  { "project": ["./tsconfig.json"] }
-ecmaVersion: 2021
-sourceType: module
-
+{
+    "root": true,
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": { "project": ["./tsconfig.json"] },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "@typescript-eslint/strict-boolean-expressions": [
+            2,
+            {
+                "allowString" : false,
+                "allowNumber" : false
+            }
+        ]
+    },
+    "ignorePatterns": ["src/**/*.test.ts", "src/frontend/generated/*"]
+}
