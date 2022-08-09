@@ -32,7 +32,7 @@ p:-moz-only-whitespace, li:-moz-only-whitespace, div:-moz-only-whitespace, secti
 }
 
 body {
-    font-size: 0.80em;
+    font-size: 0.72em;
     margin: 0 auto;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
