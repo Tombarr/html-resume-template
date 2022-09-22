@@ -182,19 +182,19 @@ li .fa, li .fab {
 
 /* Skills */
 
-.skills > ul:after {
+.sidebar-segment > ul:after {
     content: '';
     display: table;
     clear: both;
 }
 
-.skills > ul > li {
+.sidebar-segment > ul > li {
     display: block;
     float: left;
     margin: 6px 6px 0 0;
 }
 
-.skills > ul > li > span {
+.sidebar-segment > ul > li > span {
     background-color: #f5f5f5;
     border: 1px solid rgba(45, 45, 45, 0.1618);
     border-radius: 3px;
