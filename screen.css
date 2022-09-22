@@ -10,7 +10,7 @@ html {
     background-color: #f5f5f5;
 }
 
-#save > section:first-of-type aside .skills > ul > li > span {
+#save > section:first-of-type aside .sidebar-segment > ul > li > span {
     background-color: white;
 }
 
