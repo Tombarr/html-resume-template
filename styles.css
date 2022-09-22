@@ -22,7 +22,7 @@ p:-moz-only-whitespace, li:-moz-only-whitespace, div:-moz-only-whitespace, secti
 /* Page Variables */
 
 :root {
-    --main-width: 74%;
+    --main-width: 75%;
     --header-height: 1.2in;
     --sidebar-width: calc(100% - var(--main-width));
     --dark-green: #006400;
