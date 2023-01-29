@@ -54,9 +54,14 @@ body {
 img {
     max-width: 100%;
 }
-
+h6{
+    margin-bottom: 0;
+}
 p {
     margin-top: 0;
+    margin-bottom: 0;
+}
+.skills>h6,.references>h6, .contact>h6{
     margin-bottom: 0;
 }
 
@@ -88,7 +93,13 @@ li + li {
 li .fa, li .fab {
     margin-right: 0.3em;
 }
-
+/* CONTACT */
+a{
+    color: #6d0b0b;
+    font-weight: bold;
+    text-decoration: none;
+    font-size:88%;
+}
 /* Page layout */
 
 #save > section:first-of-type > aside {
