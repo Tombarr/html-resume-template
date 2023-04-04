@@ -1,0 +1,44 @@
+{
+    "about_me": {
+        "name": "Viktor Titov",
+        "birth_date": "11-12-1994",
+        "position": "Python or Golang developer",
+        "location": "Georgia, Batumi",
+        "languages": {
+            "Russian": {
+                "level": "C2",
+                "native": true
+            },
+            "English": {
+                "level": "B2",
+                "native": false
+            }
+        },
+        "contacts": {
+            "phone": "+995 599 10 85 96",
+            "telegram": "duch94",
+            "github": "https://github.com/duch94",
+            "linkedin": "https://www.linkedin.com/in/viktor-titov-73246aab/"
+        }
+    },
+    "education": {
+        "organization": "ITMO University",
+        "started": 2012,
+        "graduated": 2016,
+        "level": "Bachelor",
+        "application": "Photonics and optoinformatics",
+        "specialization": "Computer photonics"
+    },
+    "skills": [
+        "Python 3.9",
+        "Fastapi",
+        "PostgreSQL",
+        "Prometheus + Grafana",
+        "Golang",
+        "Pytest",
+        "Apache Airflow",
+        "Ansible",
+        "Jenkins"
+    ],
+    "work_experience": []
+}
