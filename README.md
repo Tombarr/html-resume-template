@@ -1,4 +1,4 @@
-# html-resume-template
+# resume
 
 Single-page resume template built using HTML, CSS, and JS that can be viewed on the web.
 Based on [html-resume-template](https://github.com/Tombarr/html-resume-template), but functionality of editing the resume from UI has been removed.
